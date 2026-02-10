@@ -6,7 +6,7 @@ public partial class StartPage : ContentPage
 {
 	VerticalStackLayout vst;
 	ScrollView sv;
-	public List<ContentPage> Lehed = new List<ContentPage>() { new TextPage(), new FigurePage() };
+	public List<ContentPage> Lehed = new List<ContentPage>() { new TextPage(1), new FigurePage() };
 	public List<string> LeheNimed = new List<string>() { "Tekst", "Kujund" };
 	public StartPage()
 	{
@@ -16,7 +16,7 @@ public partial class StartPage : ContentPage
 		{
 			Button nupp = new Button
 			{
-				Text = LeheNimed[1],
+				Text = LeheNimed[i],
 				FontSize = 30,
 				FontFamily = "Longs",
                 BackgroundColor = Colors.WhiteSmoke,

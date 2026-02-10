@@ -2,11 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileVerticalHorizontalApp.TextPage"
-             Title="TextPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Title="Text Page"
+             BackgroundColor="Black">
+
+    <VerticalStackLayout Padding="20" Spacing="15" HorizontalOptions="Center">
+
+        <Label x:Name="lbl"
+               Text="Pealkiri"
+               FontSize="20"
+               TextColor="GhostWhite"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <Editor x:Name="editor"
+                Placeholder="Sisesta tekst : "
+                PlaceholderColor="Blue"
+                FontSize="20"
+                FontAttributes="Italic"
+                HorizontalOptions="Center" />
+
+        <Button x:Name="ttsBtn"
+                Text="Kuula teksti"
+                BackgroundColor="DarkBlue"
+                TextColor="White"
+                FontSize="18"
+                Clicked="Btn_Clicked" />
+
+        <HorizontalStackLayout x:Name="hsl"
+                               Spacing="20"
+                               HorizontalOptions="Center">
+        </HorizontalStackLayout>
+
     </VerticalStackLayout>
 </ContentPage>
