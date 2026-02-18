@@ -13,6 +13,14 @@ public partial class TextPage : ContentPage
     {
         InitializeComponent();
 
+        // Создаём контейнер для кнопок
+        HorizontalStackLayout buttonStack = new HorizontalStackLayout
+        {
+            Spacing = 20,
+            HorizontalOptions = LayoutOptions.Center
+        };
+
+        // Создаём кнопки
         for (int j = 0; j < nupud.Count; j++)
         {
             Button nupp = new Button
@@ -26,14 +34,46 @@ public partial class TextPage : ContentPage
                 ZIndex = j
             };
 
+            // Обработчик нажатий на кнопки
             nupp.Clicked += Liikumine;
-            hsl.Add(nupp);
+            buttonStack.Add(nupp);
         }
 
+        // Добавляем кнопки на страницу
+        var verticalStack = new VerticalStackLayout
+        {
+            Padding = 20,
+            Spacing = 20,
+            Children = { buttonStack }
+        };
+
+        // Добавляем текстовое поле для ввода
+        var editor = new Editor
+        {
+            HeightRequest = 100,
+            Placeholder = "Введите текст",
+            VerticalOptions = LayoutOptions.Start
+        };
+
+        // Добавляем метку для отображения текста
+        var lbl = new Label
+        {
+            Text = "Ваш текст появится здесь",
+            FontSize = 18,
+            HorizontalOptions = LayoutOptions.Center
+        };
+
+        // Реагируем на изменение текста в редакторе
         editor.TextChanged += (sender, e) =>
         {
-            lbl.Text = editor.Text;
+            lbl.Text = editor.Text;  // Обновляем метку с введённым текстом
         };
+
+        // Добавляем всё на страницу
+        verticalStack.Children.Add(editor);
+        verticalStack.Children.Add(lbl);
+
+        Content = verticalStack; // Устанавливаем содержимое страницы
     }
 
     private async void Btn_Clicked(object? sender, EventArgs e)

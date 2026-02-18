@@ -1,4 +1,4 @@
-using Microsoft.Maui.Controls.Shapes;
+﻿using Microsoft.Maui.Controls.Shapes;
 
 namespace MobileVerticalHorizontalApp;
 
@@ -82,7 +82,7 @@ public partial class FigurePage : ContentPage
                 new Point(100,0),
                 new Point(200,200),
             },
-            Fill = new SolidColorBrush(Color.FromRgb(g,r,b)),
+            Fill = new SolidColorBrush(Color.FromRgb(g, r, b)),
             Stroke = Colors.AliceBlue,
             StrokeThickness = 5,
             HorizontalOptions = LayoutOptions.Center,
@@ -99,16 +99,13 @@ public partial class FigurePage : ContentPage
             kolmnurk.Fill = new SolidColorBrush(Color.FromRgb(r1, g1, b1));
 
             kolmnurk.Scale += 0.1;
-            if (kolmnurk.Scale > 2) 
+            if (kolmnurk.Scale > 2)
                 kolmnurk.Scale = 1;
 
             await kolmnurk.RotateTo(kolmnurk.Rotation + 45, 300);
         };
 
-
-
-
-        // nupud
+        // Создание кнопок
         hsl = new HorizontalStackLayout
         {
             Spacing = 20,
