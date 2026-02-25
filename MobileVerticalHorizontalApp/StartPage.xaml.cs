@@ -12,7 +12,8 @@ var pages = new List<(string, ContentPage)>
     ("Kujund", new FigurePage()), 
     ("Valgusfoor", new MainPage()),
     ("Aeg ja kuupäev", new DateTimePage()),
-    ("SliderPage", new StepperSliderPage())
+    ("SliderPage", new StepperSliderPage()),
+    ("RGBPage", new RGBPage())
 };
 
 

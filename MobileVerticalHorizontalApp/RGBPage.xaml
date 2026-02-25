@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileVerticalHorizontalApp.RGBPage"
+             Title="RGBPage">
+
+    <AbsoluteLayout>
+
+        <Label x:Name="RGBLabel"
+               Text="RGB Page"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               AbsoluteLayout.LayoutBounds="0.5,0.08,0.9,60"
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional" />
+
+        <!-- frames -->
+        <Frame x:Name="redFrame"
+               BackgroundColor="Red"
+               CornerRadius="20"
+               HasShadow="False"
+               AbsoluteLayout.LayoutBounds="0.18,0.22,90,90"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <Frame x:Name="greenFrame"
+               BackgroundColor="Green"
+               CornerRadius="20"
+               HasShadow="False"
+               AbsoluteLayout.LayoutBounds="0.5,0.22,90,90"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <Frame x:Name="blueFrame"
+               BackgroundColor="Blue"
+               CornerRadius="20"
+               HasShadow="False"
+               AbsoluteLayout.LayoutBounds="0.82,0.22,90,90"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <!-- red slider -->
+        <Slider x:Name="redSlider"
+                Minimum="0" Maximum="255" Value="0"
+                ValueChanged="OnSliderValueChanged"
+                AbsoluteLayout.LayoutBounds="0.5,0.40,0.8,40"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+        <Label x:Name="redValueLabel"
+               Text="Red = 0"
+               HorizontalTextAlignment="Center"
+               AbsoluteLayout.LayoutBounds="0.5,0.44,0.8,30"
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+        <!-- green slider -->
+        <Slider x:Name="greenSlider"
+                Minimum="0" Maximum="255" Value="0"
+                ValueChanged="OnSliderValueChanged"
+                AbsoluteLayout.LayoutBounds="0.5,0.49,0.8,40"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+        <Label x:Name="greenValueLabel"
+               Text="Green = 0"
+               HorizontalTextAlignment="Center"
+               AbsoluteLayout.LayoutBounds="0.5,0.53,0.8,30"
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+        <!-- blue slider -->
+        <Slider x:Name="blueSlider"
+                Minimum="0" Maximum="255" Value="0"
+                ValueChanged="OnSliderValueChanged"
+                AbsoluteLayout.LayoutBounds="0.5,0.58,0.8,40"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+        <Label x:Name="blueValueLabel"
+               Text="Blue = 0"
+               HorizontalTextAlignment="Center"
+               AbsoluteLayout.LayoutBounds="0.5,0.62,0.8,30"
+               AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+        <!-- random -->
+        <Button Text="Random color"
+                Clicked="OnRandomClicked"
+                AbsoluteLayout.LayoutBounds="0.5,0.74,0.6,50"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+        <!-- colorbox -->
+        <Frame x:Name="colorBox"
+                BackgroundColor="Black"
+                CornerRadius="20"
+                AbsoluteLayout.LayoutBounds="0.5,0.90,0.75,130"
+                AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+    </AbsoluteLayout>
+</ContentPage>
