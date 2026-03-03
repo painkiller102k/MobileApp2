@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileVerticalHorizontalApp.Lumememm"
+             Title="Lumememm">
+
+    <AbsoluteLayout x:Name="Root" BackgroundColor="LightSkyBlue">
+
+        <!-- lumememm  -->
+        <AbsoluteLayout x:Name="SnowmanArea"
+                        BackgroundColor="LightSkyBlue"
+                        AbsoluteLayout.LayoutBounds="0,0,1,0.65"
+                        AbsoluteLayout.LayoutFlags="All">
+
+            <!-- bucket -->
+            <BoxView x:Name="Bucket"
+                     Color="Gray"
+                     AbsoluteLayout.LayoutBounds="0.5,0.15,100,70"
+                     AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <!-- head -->
+            <Frame x:Name="Head"
+                   BackgroundColor="White"
+                   CornerRadius="999"
+                   HasShadow="False"
+                   Padding="0"
+                   AbsoluteLayout.LayoutBounds="0.5,0.30,110,110"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <!-- body -->
+            <Frame x:Name="Body"
+                   BackgroundColor="White"
+                   CornerRadius="999"
+                   HasShadow="False"
+                   Padding="0"
+                   AbsoluteLayout.LayoutBounds="0.5,0.64,160,160"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <!-- eyes -->
+            <Frame x:Name="Eye1"
+                   BackgroundColor="Black"
+                   CornerRadius="999"
+                   HasShadow="False"
+                   Padding="0"
+                   AbsoluteLayout.LayoutBounds="0.46,0.32,12,12"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <Frame x:Name="Eye2"
+                   BackgroundColor="Black"
+                   CornerRadius="999"
+                   HasShadow="False"
+                   Padding="0"
+                   AbsoluteLayout.LayoutBounds="0.54,0.32,12,12"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <!-- buttons -->
+            <Frame x:Name="Dot1"
+                   BackgroundColor="Black"
+                   CornerRadius="999"
+                   HasShadow="False"
+                   Padding="0"
+                   AbsoluteLayout.LayoutBounds="0.5,0.55,14,14"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <Frame x:Name="Dot2"
+                   BackgroundColor="Black"
+                   CornerRadius="999"
+                   HasShadow="False"
+                   Padding="0"
+                   AbsoluteLayout.LayoutBounds="0.5,0.63,14,14"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+            <Frame x:Name="Dot3"
+                   BackgroundColor="Black"
+                   CornerRadius="999"
+                   HasShadow="False"
+                   Padding="0"
+                   AbsoluteLayout.LayoutBounds="0.5,0.71,14,14"
+                   AbsoluteLayout.LayoutFlags="PositionProportional" />
+
+        </AbsoluteLayout>
+
+        <!-- bottom panel -->
+        <VerticalStackLayout Spacing="8" Padding="10"
+                             AbsoluteLayout.LayoutBounds="0,0.67,1,0.33"
+                             AbsoluteLayout.LayoutFlags="All">
+
+            <Picker x:Name="ActionPicker" Title="Vali tegevus">
+                <Picker.Items>
+                    <x:String>Peida lumememm</x:String>
+                    <x:String>Näita lumememm</x:String>
+                    <x:String>Muuda värvi</x:String>
+                    <x:String>Sulata</x:String>
+                    <x:String>Tantsi</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Button Text="Käivita" Clicked="OnRunClicked" />
+
+            <Label x:Name="ActionLabel" Text="Tegevus: -" />
+
+            <Label Text="Opacity" FontSize="12" />
+            <Slider x:Name="OpacitySlider"
+                    Minimum="0" Maximum="1"
+                    Value="1"
+                    ValueChanged="OnOpacityChanged" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Label Text="Kiirus" VerticalOptions="Center" />
+                <Stepper x:Name="SpeedStepper"
+                         Minimum="100" Maximum="2000"
+                         Increment="100"
+                         Value="500"
+                         ValueChanged="OnSpeedChanged" />
+                <Label x:Name="SpeedLabel" Text="500" VerticalOptions="Center" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+
+    </AbsoluteLayout>
+
+</ContentPage>
