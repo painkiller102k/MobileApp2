@@ -35,6 +35,11 @@ public partial class Lumememm : ContentPage
         Dot1.Opacity = value;
         Dot2.Opacity = value;
         Dot3.Opacity = value;
+
+        HatBrim.Opacity = value;
+        HatBand.Opacity = value;
+        HatBuckle.Opacity = value;
+        HatShine.Opacity = value;
     }
 
     void OnSpeedChanged(object sender, ValueChangedEventArgs e)

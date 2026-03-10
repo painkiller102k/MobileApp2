@@ -14,7 +14,8 @@ var pages = new List<(string, ContentPage)>
     ("Aeg ja kuupäev", new DateTimePage()),
     ("SliderPage", new StepperSliderPage()),
     ("RGBPage", new RGBPage()),
-    ("Lumememm", new Lumememm())
+    ("Lumememm", new Lumememm()),
+    ("PopUp", new PopUp())
 };
 
 

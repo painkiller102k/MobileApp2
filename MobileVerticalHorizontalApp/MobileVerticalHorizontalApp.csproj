@@ -72,6 +72,9 @@
 	  <MauiXaml Update="Lumememm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="RGBPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
