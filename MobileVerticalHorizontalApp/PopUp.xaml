@@ -2,35 +2,102 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileVerticalHorizontalApp.PopUp"
-             Title="PopUp">
+             Title="PopUp"
+             BackgroundColor="#F3F7FF">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="15">
+        <VerticalStackLayout Padding="25" Spacing="20">
 
-            <Label
-                Text="PopUp Leht "
-                FontSize="28"
+            <Border
+                BackgroundColor="#4F6DFF"
+                StrokeThickness="0"
+                Padding="20"
+                StrokeShape="RoundRectangle 25">
+
+                <VerticalStackLayout Spacing="8">
+                    <Label
+                        Text="Küsimuste mäng"
+                        FontSize="30"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        HorizontalOptions="Center" />
+
+                    <Label
+                        Text="Vali teema ja alusta mängu"
+                        FontSize="16"
+                        TextColor="White"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#D9E2FF"
+                StrokeThickness="2"
+                Padding="18"
+                StrokeShape="RoundRectangle 20">
+
+                <VerticalStackLayout Spacing="10">
+                    <Label
+                        Text="Info"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#2D3A6B"
+                        HorizontalOptions="Center" />
+
+                    <Label
+                        x:Name="InfoLabel"
+                        Text="Kõigepealt vali teema"
+                        FontSize="18"
+                        TextColor="#444444"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button
+                Text="Vali teema"
+                Clicked="OnTopicClicked"
+                FontSize="20"
                 FontAttributes="Bold"
-                HorizontalOptions="Center" />
-
-            <Label
-                x:Name="InfoLabel"
-                Text="Vajuta nupule"
-                FontSize="18"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center" />
+                HeightRequest="60"
+                CornerRadius="18"
+                BackgroundColor="#6C8CFF"
+                TextColor="White" />
 
             <Button
-                Text="Küsi nime"
-                Clicked="OnNameClicked" />
+                Text="▶Alusta mängu"
+                Clicked="OnStartClicked"
+                FontSize="20"
+                FontAttributes="Bold"
+                HeightRequest="60"
+                CornerRadius="18"
+                BackgroundColor="#4CAF50"
+                TextColor="White" />
 
             <Button
-                Text="Korrutustabeli test"
-                Clicked="OnMathClicked" />
+                Text="Värvi valik"
+                Clicked="OnColorClicked"
+                FontSize="20"
+                FontAttributes="Bold"
+                HeightRequest="60"
+                CornerRadius="18"
+                BackgroundColor="#FF9800"
+                TextColor="White" />
 
-            <Button
-                Text="Vali lehe värv"
-                Clicked="OnColorClicked" />
+            <Border
+                BackgroundColor="#EEF3FF"
+                StrokeThickness="0"
+                Padding="15"
+                StrokeShape="RoundRectangle 18">
+
+                <Label
+                    Text="Vajuta kõigepealt nupule „Vali teema“, siis „Alusta mängu“."
+                    FontSize="15"
+                    TextColor="#445"
+                    HorizontalTextAlignment="Center" />
+            </Border>
 
         </VerticalStackLayout>
     </ScrollView>

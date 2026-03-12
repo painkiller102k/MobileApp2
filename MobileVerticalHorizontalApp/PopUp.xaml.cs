@@ -1,91 +1,167 @@
-﻿namespace MobileVerticalHorizontalApp;
+﻿using System.Collections.Generic;
+
+namespace MobileVerticalHorizontalApp;
 
 public partial class PopUp : ContentPage
 {
     Random random = new Random();
+
+    string userName = "";
+    string selectedTopic = "";
+
+    Dictionary<string, string> riddleQuestions = new Dictionary<string, string>()
+    {
+        { "Mis on see: tal on neli jalga, aga ta ei kõnni?", "laud" },
+        { "Mis on see: tal on hambad, aga ta ei söö?", "kamm" },
+        { "Mis on see: valge väljast, kollane seest?", "muna" }
+    };
+
+    Dictionary<string, string> mathQuestions = new Dictionary<string, string>()
+    {
+        { "Kui palju on 2 + 3 ?", "5" },
+        { "Kui palju on 4 x 2 ?", "8" },
+        { "Kui palju on 7 + 1 ?", "8" },
+        { "Kui palju on 3 x 3 ?", "9" },
+        { "Kui palju on 6 x 6 ?", "36"},
+        { "Kui palju on 7 x 5 ?", "35"},
+    };
 
     public PopUp()
     {
         InitializeComponent();
     }
 
-    private async void OnNameClicked(object sender, EventArgs e)
+    private async void OnTopicClicked(object sender, EventArgs e)
     {
-        string name = await DisplayPromptAsync("Tere!", "Mis sinu nimi on?");
+        string topic = await DisplayActionSheetAsync(
+            "Vali teema",
+            "Loobu",
+            null,
+            "Tavalised mõistatused",
+            "Matemaatilised näited"
+        );
 
-        if (name == null || name == "")
+        if (topic == "Loobu" || topic == null)
         {
-            await DisplayAlert("Viga", "Sa ei sisestanud nime.", "OK");
+            return;
         }
-        else
-        {
-            InfoLabel.Text = "Tere, " + name + "!";
-            await DisplayAlert("Tervitus", "Tere, " + name + "!", "OK");
-        }
+
+        selectedTopic = topic;
+        InfoLabel.Text = "Valitud teema: " + selectedTopic;
     }
 
-    private async void OnMathClicked(object sender, EventArgs e)
+    private async void OnStartClicked(object sender, EventArgs e)
     {
-        int a = random.Next(1, 10);
-        int b = random.Next(1, 10);
+        if (selectedTopic == "")
+        {
+            await DisplayAlertAsync("Viga", "Palun vali kõigepealt teema.", "OK");
+            return;
+        }
 
-        string answer = await DisplayPromptAsync("Test", "Kui palju on " + a + " x " + b + " ?");
+        if (userName == "")
+        {
+            string name = await DisplayPromptAsync("Tere!", "Mis sinu nimi on?");
+
+            if (name == null || name == "")
+            {
+                await DisplayAlertAsync("Viga", "Sa ei sisestanud nime.", "OK");
+                return;
+            }
+
+            userName = name;
+        }
+
+        InfoLabel.Text = "Tere, " + userName + "! Teema: " + selectedTopic;
+
+        await AskQuestion();
+    }
+
+    private async Task AskQuestion()
+    {
+        string question = "";
+        string correctAnswer = "";
+
+        if (selectedTopic == "Tavalised mõistatused")
+        {
+            List<string> questions = new List<string>(riddleQuestions.Keys); // kõik keys - spisok
+            int index = random.Next(questions.Count);       
+
+            question = questions[index];
+            correctAnswer = riddleQuestions[question];
+        }
+        else if (selectedTopic == "Matemaatilised näited")
+        {
+            List<string> questions = new List<string>(mathQuestions.Keys); // kõik keys - spisok
+            int index = random.Next(questions.Count);
+
+            question = questions[index];
+            correctAnswer = mathQuestions[question];
+        }
+
+        string answer = await DisplayPromptAsync("Küsimus", userName + ", " + question);
 
         if (answer == null || answer == "")
         {
-            await DisplayAlert("Viga", "Vastus jäi sisestamata.", "OK");
-
-            bool continueGame1 = await DisplayAlert("Küsimus", "Kas soovid jätkata?", "Jah", "Ei");
-
-            if (continueGame1)
-            {
-                OnMathClicked(sender, e);
-            }
-
-            return;
-        }
-
-        int userNumber;
-
-        if (int.TryParse(answer, out userNumber))
-        {
-            if (userNumber == a * b)
-            {
-                InfoLabel.Text = "Tubli! Vastus on õige.";
-                await DisplayAlert("Tulemus", "Õige vastus!", "OK");
-            }
-            else
-            {
-                InfoLabel.Text = "Vale vastus. Õige vastus on " + (a * b);
-                await DisplayAlert("Tulemus", "Vale vastus. Õige vastus on " + (a * b), "OK");
-            }
+            await DisplayAlertAsync("Viga", "Vastus jäi sisestamata.", "OK");
         }
         else
         {
-            await DisplayAlert("Viga", "Sisesta number.", "OK");
-
-            bool continueGame2 = await DisplayAlert("Küsimus", "Kas soovid jätkata?", "Jah", "Ei");
-
-            if (continueGame2)
+            if (selectedTopic == "Tavalised mõistatused")
             {
-                OnMathClicked(sender, e);
+                if (answer.ToLower().Trim() == correctAnswer)
+                {
+                    InfoLabel.Text = "Tubli, " + userName + "! Vastus on õige.";
+                    await DisplayAlertAsync("Tulemus", "Õige vastus!", "OK");
+                }
+                else
+                {
+                    InfoLabel.Text = "Vale vastus. Õige vastus on " + correctAnswer;
+                    await DisplayAlertAsync("Tulemus", "Vale vastus. Õige vastus on " + correctAnswer, "OK");
+                }
             }
-
-            return;
+            else
+            {
+                if (answer.Trim() == correctAnswer)
+                {
+                    InfoLabel.Text = "Tubli, " + userName + "! Vastus on õige.";
+                    await DisplayAlertAsync("Tulemus", "Õige vastus!", "OK");
+                }
+                else
+                {
+                    InfoLabel.Text = "Vale vastus. Õige vastus on " + correctAnswer;
+                    await DisplayAlertAsync("Tulemus", "Vale vastus. Õige vastus on " + correctAnswer, "OK");
+                }
+            }
         }
 
-        bool continueGame3 = await DisplayAlert("Küsimus", "Kas soovid jätkata?", "Jah", "Ei");
+        bool continueGame = await DisplayAlertAsync(
+            "Küsimus",
+            userName + ", kas soovid jätkata?",
+            "Jah",
+            "Ei"
+        );
 
-        if (continueGame3)
+        if (continueGame)
         {
-            OnMathClicked(sender, e);
+            await AskQuestion();
+        }
+        else
+        {
+            InfoLabel.Text = "Aitäh mängimast, " + userName + "!";
         }
     }
 
     private async void OnColorClicked(object sender, EventArgs e)
     {
-        string color = await DisplayActionSheet("Vali värv", "Loobu", null,
-            "Valge", "Kollane", "Sinine", "Roosa");
+        string color = await DisplayActionSheetAsync(
+            "Vali värv",
+            "Loobu",
+            null,
+            "Valge",
+            "Kollane",
+            "Sinine",
+            "Roosa"
+        );
 
         if (color == "Valge")
         {
