@@ -2,11 +2,133 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MobileVerticalHorizontalApp.TripsTrapsTrull"
-             Title="TripsTrapsTrull">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="Trips-Traps-Trull"
+             BackgroundColor="#F3F4F6">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Frame BackgroundColor="#4F46E5"
+                   CornerRadius="20"
+                   Padding="20"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Trips-Traps-Trull"
+                           FontSize="30"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+
+                    <Label Text="Lihtne mäng kahele mängijale"
+                           FontSize="16"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White"
+                   CornerRadius="18"
+                   Padding="15"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Mängu info"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#111827" />
+
+                    <Label x:Name="PlayersLabel"
+                           Text="Mängija 1 (X) vs Mängija 2 (O)"
+                           FontSize="18"
+                           TextColor="#374151" />
+
+                    <Label x:Name="StatusLabel"
+                           Text="Kõigepealt seadista mäng"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#1D4ED8" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White"
+                   CornerRadius="18"
+                   Padding="15"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Menüü"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           TextColor="#111827" />
+
+                    <Button Text="Vali mängijad"
+                            Clicked="OnPlayersClicked"
+                            BackgroundColor="#2563EB"
+                            TextColor="White"
+                            CornerRadius="12" />
+
+                    <Button Text="Vali sümbolid"
+                            Clicked="OnSymbolsClicked"
+                            BackgroundColor="#7C3AED"
+                            TextColor="White"
+                            CornerRadius="12" />
+
+                    <Button Text="Vali teema"
+                            Clicked="OnThemeClicked"
+                            BackgroundColor="#059669"
+                            TextColor="White"
+                            CornerRadius="12" />
+
+                    <Button Text="Reeglid"
+                            Clicked="OnRulesClicked"
+                            BackgroundColor="#EA580C"
+                            TextColor="White"
+                            CornerRadius="12" />
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Button Text="Alusta mängu"
+                                Clicked="OnStartGameClicked"
+                                BackgroundColor="#DC2626"
+                                TextColor="White"
+                                CornerRadius="12"
+                                HorizontalOptions="FillAndExpand" />
+
+                        <Button Text="Uus mäng"
+                                Clicked="OnNewGameClicked"
+                                BackgroundColor="#6B7280"
+                                TextColor="White"
+                                CornerRadius="12"
+                                HorizontalOptions="FillAndExpand" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <Frame BackgroundColor="White"
+                   CornerRadius="20"
+                   Padding="15"
+                   HasShadow="True"
+                   HorizontalOptions="Center">
+                <Grid x:Name="BoardGrid"
+                      RowDefinitions="*,*,*"
+                      ColumnDefinitions="*,*,*"
+                      RowSpacing="8"
+                      ColumnSpacing="8"
+                      HeightRequest="330"
+                      WidthRequest="330">
+
+                    <Button x:Name="A1" Grid.Row="0" Grid.Column="0" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="0,0" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+                    <Button x:Name="A2" Grid.Row="0" Grid.Column="1" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="0,1" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+                    <Button x:Name="A3" Grid.Row="0" Grid.Column="2" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="0,2" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+
+                    <Button x:Name="S1" Grid.Row="1" Grid.Column="0" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="1,0" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+                    <Button x:Name="S2" Grid.Row="1" Grid.Column="1" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="1,1" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+                    <Button x:Name="S3" Grid.Row="1" Grid.Column="2" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="1,2" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+
+                    <Button x:Name="D1" Grid.Row="2" Grid.Column="0" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="2,0" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+                    <Button x:Name="D2" Grid.Row="2" Grid.Column="1" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="2,1" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+                    <Button x:Name="D3" Grid.Row="2" Grid.Column="2" FontSize="32" CornerRadius="16" Clicked="OnCellClicked" CommandParameter="2,2" BackgroundColor="#E0E7FF" TextColor="#111827"/>
+
+                </Grid>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

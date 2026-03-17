@@ -124,7 +124,7 @@ public partial class PopUp : ContentPage
                 if (answer.Trim() == correctAnswer)
                 {
                     InfoLabel.Text = "Tubli, " + userName + "! Vastus on õige.";
-                    await DisplayAlertAsync("Tulemus", "Õige vastus!", "OK");
+                    await DisplayAlertAsync("Tulumes", "Õige vastus !", "OK");
                 }
                 else
                 {

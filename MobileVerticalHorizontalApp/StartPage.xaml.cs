@@ -15,7 +15,8 @@ var pages = new List<(string, ContentPage)>
     ("SliderPage", new StepperSliderPage()),
     ("RGBPage", new RGBPage()),
     ("Lumememm", new Lumememm()),
-    ("PopUp", new PopUp())
+    ("PopUp", new PopUp()),
+    ("TripsTrapsTrull", new TripsTrapsTrull())
 };
 
 

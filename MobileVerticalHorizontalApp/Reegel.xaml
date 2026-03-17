@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MobileVerticalHorizontalApp.Reegel"
+             Title="Reeglid"
+             BackgroundColor="#FFF7ED">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Frame BackgroundColor="#FB923C"
+                   CornerRadius="20"
+                   Padding="20"
+                   HasShadow="True">
+                <Label Text="Mängu reeglid"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center" />
+            </Frame>
+
+            <Frame BackgroundColor="White"
+                   CornerRadius="18"
+                   Padding="15"
+                   HasShadow="True">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="1. Mängus osaleb kaks mängijat."
+                           FontSize="18"
+                           TextColor="#111827" />
+
+                    <Label Text="2. Mängijad teevad käike kordamööda."
+                           FontSize="18"
+                           TextColor="#111827" />
+
+                    <Label Text="3. Võitmiseks tuleb saada 3 ühesugust märki ühte ritta."
+                           FontSize="18"
+                           TextColor="#111827" />
+
+                    <Label Text="4. Võidurada võib olla horisontaalne, vertikaalne või diagonaalne."
+                           FontSize="18"
+                           TextColor="#111827" />
+
+                    <Label Text="5. Kui kõik ruudud on täidetud ja võitjat ei ole, siis on viik."
+                           FontSize="18"
+                           TextColor="#111827" />
+
+                    <Label Text="6. Enne mängu algust saab valida mängijad, sümbolid ja teema."
+                           FontSize="18"
+                           TextColor="#111827" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <Button Text="Tagasi"
+                    Clicked="OnBackClicked"
+                    BackgroundColor="#EA580C"
+                    TextColor="White"
+                    CornerRadius="12" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
