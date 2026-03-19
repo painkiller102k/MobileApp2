@@ -2,9 +2,6 @@
 
 public partial class TripsTrapsTrull : ContentPage
 {
-    string[,] board = new string[3, 3];
-    Button[,] buttons;
-
     string player1Name = "Mängija 1";
     string player2Name = "Mängija 2";
 
@@ -18,17 +15,9 @@ public partial class TripsTrapsTrull : ContentPage
     public TripsTrapsTrull()
     {
         InitializeComponent();
-
-        buttons = new Button[,]
-        {
-            { A1, A2, A3 },
-            { S1, S2, S3 },
-            { D1, D2, D3 }
-        };
-
-        UpdateInfo();
         ResetGame();
         DisableBoard();
+        UpdateInfo();
     }
 
     private async void OnPlayersClicked(object sender, EventArgs e)
@@ -43,10 +32,10 @@ public partial class TripsTrapsTrull : ContentPage
 
         await AskWhoStarts();
 
-        UpdateInfo();
+        gameStarted = false;
         ResetGame();
         DisableBoard();
-        gameStarted = false;
+        UpdateInfo();
         StatusLabel.Text = "Vajuta \"Alusta mängu\"";
     }
 
@@ -54,29 +43,21 @@ public partial class TripsTrapsTrull : ContentPage
     {
         while (true)
         {
-            string result = await DisplayPromptAsync(
+            string answer = await DisplayPromptAsync(
                 "Kes alustab?",
-                $"Kirjuta ainult 1 või 2\n1 - {player1Name}\n2 - {player2Name}",
+                $"Sisesta ainult 1 või 2\n1 - {player1Name}\n2 - {player2Name}",
                 initialValue: "1");
 
-            if (result == null)
+            if (answer == null || answer.Trim() == "1")
             {
                 player1Starts = true;
-                break;
+                return;
             }
 
-            result = result.Trim();
-
-            if (result == "1")
-            {
-                player1Starts = true;
-                break;
-            }
-
-            if (result == "2")
+            if (answer.Trim() == "2")
             {
                 player1Starts = false;
-                break;
+                return;
             }
 
             await DisplayAlertAsync("Viga", "Sisestada võib ainult 1 või 2.", "OK");
@@ -86,7 +67,7 @@ public partial class TripsTrapsTrull : ContentPage
     private async void OnSymbolsClicked(object sender, EventArgs e)
     {
         string choice = await DisplayActionSheetAsync(
-            "Vali sümbolite komplekt",
+            "Vali sümbolid",
             "Loobu",
             null,
             "X ja O",
@@ -103,10 +84,10 @@ public partial class TripsTrapsTrull : ContentPage
             player2Symbol = "😎";
         }
 
-        UpdateInfo();
+        gameStarted = false;
         ResetGame();
         DisableBoard();
-        gameStarted = false;
+        UpdateInfo();
         StatusLabel.Text = "Vajuta \"Alusta mängu\"";
     }
 
@@ -117,12 +98,12 @@ public partial class TripsTrapsTrull : ContentPage
         if (theme == "Hele")
         {
             App.Current.UserAppTheme = AppTheme.Light;
-            this.BackgroundColor = Color.FromArgb("#F3F4F6");
+            BackgroundColor = Color.FromArgb("#F3F4F6");
         }
         else if (theme == "Tume")
         {
             App.Current.UserAppTheme = AppTheme.Dark;
-            this.BackgroundColor = Color.FromArgb("#111827");
+            BackgroundColor = Color.FromArgb("#111827");
         }
     }
 
@@ -133,9 +114,9 @@ public partial class TripsTrapsTrull : ContentPage
 
     private void OnStartGameClicked(object sender, EventArgs e)
     {
+        gameStarted = true;
         ResetGame();
         EnableBoard();
-        gameStarted = true;
         UpdateStatus();
     }
 
@@ -153,38 +134,30 @@ public partial class TripsTrapsTrull : ContentPage
     {
         if (!gameStarted)
         {
-            await DisplayAlertAsync("Viga", "Kõigepealt vajuta nuppu \"Alusta mängu\".", "OK");
+            await DisplayAlertAsync("Viga", "Kõigepealt vajuta \"Alusta mängu\".", "OK");
             return;
         }
 
-        Button button = (Button)sender;
-        string[] pos = button.CommandParameter.ToString().Split(',');
+        Button button = (Button)sender; //objekt nupp
 
-        int row = int.Parse(pos[0]);
-        int col = int.Parse(pos[1]);
-
-        if (!string.IsNullOrEmpty(board[row, col]))
+        if (!string.IsNullOrEmpty(button.Text)) //пустая ли клетка
             return;
-
-        string currentSymbol;
-        string currentPlayerName;
 
         if (player1Turn)
         {
-            currentSymbol = player1Symbol;
-            currentPlayerName = player1Name;
+            button.Text = player1Symbol;
             button.TextColor = Colors.Blue;
         }
         else
         {
-            currentSymbol = player2Symbol;
-            currentPlayerName = player2Name;
+            button.Text = player2Symbol;
             button.TextColor = Colors.Red;
         }
 
-        board[row, col] = currentSymbol;
-        button.Text = currentSymbol;
         button.IsEnabled = false;
+
+        string currentSymbol = player1Turn ? player1Symbol : player2Symbol; // igrok symbol
+        string currentName = player1Turn ? player1Name : player2Name; // igrok name
 
         if (CheckWin(currentSymbol))
         {
@@ -192,15 +165,15 @@ public partial class TripsTrapsTrull : ContentPage
 
             bool again = await DisplayAlertAsync(
                 "Võit",
-                $"{currentPlayerName} võitis!\nSümbol: {currentSymbol}\nKas soovid veel mängida?",
+                $"{currentName} võitis!\nKas soovid veel mängida?",
                 "Jah",
                 "Ei");
 
             if (again)
             {
+                gameStarted = true;
                 ResetGame();
                 EnableBoard();
-                gameStarted = true;
             }
             else
             {
@@ -223,9 +196,9 @@ public partial class TripsTrapsTrull : ContentPage
 
             if (again)
             {
+                gameStarted = true;
                 ResetGame();
                 EnableBoard();
-                gameStarted = true;
             }
             else
             {
@@ -242,45 +215,54 @@ public partial class TripsTrapsTrull : ContentPage
 
     private void ResetGame()
     {
-        board = new string[3, 3];
         player1Turn = player1Starts;
 
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                buttons[i, j].Text = "";
-                buttons[i, j].IsEnabled = true;
-                buttons[i, j].TextColor = Colors.Black;
-                buttons[i, j].BackgroundColor = Color.FromArgb("#E0E7FF");
-            }
-        }
+        ClearButton(A1);
+        ClearButton(A2);
+        ClearButton(A3);
+        ClearButton(S1);
+        ClearButton(S2);
+        ClearButton(S3);
+        ClearButton(D1);
+        ClearButton(D2);
+        ClearButton(D3);
 
-        UpdateInfo();
         UpdateStatus();
+        UpdateInfo();
+    }
+
+    private void ClearButton(Button button)
+    {
+        button.Text = "";
+        button.TextColor = Colors.Black;
+        button.BackgroundColor = Color.FromArgb("#E0E7FF");
+        button.IsEnabled = true;
     }
 
     private void DisableBoard()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                buttons[i, j].IsEnabled = false;
-            }
-        }
+        A1.IsEnabled = false;
+        A2.IsEnabled = false;
+        A3.IsEnabled = false;
+        S1.IsEnabled = false;
+        S2.IsEnabled = false;
+        S3.IsEnabled = false;
+        D1.IsEnabled = false;
+        D2.IsEnabled = false;
+        D3.IsEnabled = false;
     }
 
     private void EnableBoard()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                if (string.IsNullOrEmpty(board[i, j]))
-                    buttons[i, j].IsEnabled = true;
-            }
-        }
+        A1.IsEnabled = string.IsNullOrEmpty(A1.Text);
+        A2.IsEnabled = string.IsNullOrEmpty(A2.Text);
+        A3.IsEnabled = string.IsNullOrEmpty(A3.Text);
+        S1.IsEnabled = string.IsNullOrEmpty(S1.Text);
+        S2.IsEnabled = string.IsNullOrEmpty(S2.Text);
+        S3.IsEnabled = string.IsNullOrEmpty(S3.Text);
+        D1.IsEnabled = string.IsNullOrEmpty(D1.Text);
+        D2.IsEnabled = string.IsNullOrEmpty(D2.Text);
+        D3.IsEnabled = string.IsNullOrEmpty(D3.Text);
     }
 
     private void UpdateInfo()
@@ -304,35 +286,30 @@ public partial class TripsTrapsTrull : ContentPage
 
     private bool CheckWin(string symbol)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            if (board[i, 0] == symbol && board[i, 1] == symbol && board[i, 2] == symbol)
-                return true;
+        if (A1.Text == symbol && A2.Text == symbol && A3.Text == symbol) return true;
+        if (S1.Text == symbol && S2.Text == symbol && S3.Text == symbol) return true;
+        if (D1.Text == symbol && D2.Text == symbol && D3.Text == symbol) return true;
 
-            if (board[0, i] == symbol && board[1, i] == symbol && board[2, i] == symbol)
-                return true;
-        }
+        if (A1.Text == symbol && S1.Text == symbol && D1.Text == symbol) return true;
+        if (A2.Text == symbol && S2.Text == symbol && D2.Text == symbol) return true;
+        if (A3.Text == symbol && S3.Text == symbol && D3.Text == symbol) return true;
 
-        if (board[0, 0] == symbol && board[1, 1] == symbol && board[2, 2] == symbol)
-            return true;
-
-        if (board[0, 2] == symbol && board[1, 1] == symbol && board[2, 0] == symbol)
-            return true;
+        if (A1.Text == symbol && S2.Text == symbol && D3.Text == symbol) return true;
+        if (A3.Text == symbol && S2.Text == symbol && D1.Text == symbol) return true;
 
         return false;
     }
 
-    private bool CheckDraw()
+    private bool CheckDraw() // text - true - draw 
     {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 3; j++)
-            {
-                if (string.IsNullOrEmpty(board[i, j]))
-                    return false;
-            }
-        }
-
-        return true;
+        return !string.IsNullOrEmpty(A1.Text) &&
+               !string.IsNullOrEmpty(A2.Text) &&
+               !string.IsNullOrEmpty(A3.Text) &&
+               !string.IsNullOrEmpty(S1.Text) &&
+               !string.IsNullOrEmpty(S2.Text) &&
+               !string.IsNullOrEmpty(S3.Text) &&
+               !string.IsNullOrEmpty(D1.Text) &&
+               !string.IsNullOrEmpty(D2.Text) &&
+               !string.IsNullOrEmpty(D3.Text);
     }
 }
