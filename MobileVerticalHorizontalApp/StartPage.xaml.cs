@@ -16,7 +16,8 @@ var pages = new List<(string, ContentPage)>
     ("RGBPage", new RGBPage()),
     ("Lumememm", new Lumememm()),
     ("PopUp", new PopUp()),
-    ("TripsTrapsTrull", new TripsTrapsTrull())
+    ("TripsTrapsTrull", new TripsTrapsTrull()),
+    ("Kontaktandmed", new Kontaktandmed())
 };
 
 
