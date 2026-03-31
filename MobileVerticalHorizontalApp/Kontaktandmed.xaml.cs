@@ -26,7 +26,7 @@ public partial class Kontaktandmed : ContentPage
         {
             ImageSource = ImageSource.FromFile("peter_griffin.png"),
             Text = "Sõbra foto",
-            Detail = "Kirjeldus"
+            Detail = "See on minu sõber!"
         };
 
         fotosection = new TableSection();
@@ -155,11 +155,11 @@ public partial class Kontaktandmed : ContentPage
         Random rnd = new Random();
         string msg = list[rnd.Next(list.Count)];
 
-        bool sms = await DisplayAlert("Valik", "Saata SMS?", "Jah", "Ei");
+        bool sms = await DisplayAlertAsync("Valik", "Saata SMS?", "Jah", "Ei");
 
-        if (sms && Sms.Default.IsComposeSupported)
+        if (sms && Sms.Default.IsComposeSupported) // jah
         {
-            await Sms.Default.ComposeAsync(new SmsMessage(msg, phoneCell.Text));
+            await Sms.Default.ComposeAsync(new SmsMessage(msg, phoneCell.Text)); //msg list
         }
         else if (Email.Default.IsComposeSupported)
         {

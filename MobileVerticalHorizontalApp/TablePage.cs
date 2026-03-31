@@ -16,7 +16,7 @@ public class TablePage : ContentPage
 
         ic = new ImageCell
         {
-            ImageSource = ImageSource.FromFile("dotnet_bot.png"),
+            ImageSource = ImageSource.FromFile("peter_griffin.png"),
             Text = "Foto nimetus",
             Detail = "Foto kirjeldus"
         };
