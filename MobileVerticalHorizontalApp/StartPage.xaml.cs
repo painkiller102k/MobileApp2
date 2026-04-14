@@ -17,7 +17,8 @@ var pages = new List<(string, ContentPage)>
     ("Lumememm", new Lumememm()),
     ("PopUp", new PopUp()),
     ("TripsTrapsTrull", new TripsTrapsTrull()),
-    ("Kontaktandmed", new Kontaktandmed())
+    ("Kontaktandmed", new Kontaktandmed()),
+    ("ListPage", new ListViewPage())
 };
 
 
