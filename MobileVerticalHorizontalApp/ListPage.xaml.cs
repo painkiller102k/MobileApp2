@@ -148,7 +148,7 @@ namespace MobileVerticalHorizontalApp
         {
             try
             {
-                var photo = await MediaPicker.Default.PickPhotoAsync();
+                var photo = await MediaPicker.Default.PickPhotoAsync(); // photo emulator
 
                 if (photo != null)
                 {
@@ -166,7 +166,7 @@ namespace MobileVerticalHorizontalApp
             string nimi = entryNimi.Text;
 
             bool olemas = riigid.Any(r =>
-                r.Nimi.Equals(nimi, StringComparison.OrdinalIgnoreCase));
+                r.Nimi.Equals(nimi, StringComparison.OrdinalIgnoreCase)); // spisok nimi -> uus nimi
 
             if (olemas)
             {
@@ -227,7 +227,7 @@ namespace MobileVerticalHorizontalApp
         // select
         private async void List_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            valitudRiik = e.Item as Riik;
+            valitudRiik = e.Item as Riik; // element spiska
 
             if (valitudRiik != null)
             {
