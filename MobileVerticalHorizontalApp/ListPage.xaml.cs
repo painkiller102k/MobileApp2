@@ -166,7 +166,7 @@ namespace MobileVerticalHorizontalApp
             string nimi = entryNimi.Text;
 
             bool olemas = riigid.Any(r =>
-                r.Nimi.Equals(nimi, StringComparison.OrdinalIgnoreCase)); // spisok nimi -> uus nimi
+                r.Nimi.Equals(nimi, StringComparison.OrdinalIgnoreCase)); // spisok nimi
 
             if (olemas)
             {
@@ -215,11 +215,11 @@ namespace MobileVerticalHorizontalApp
             int.TryParse(entryRahvaarv.Text, out int arv);
             valitudRiik.Rahvaarv = arv;
 
-            if (!string.IsNullOrEmpty(valitudLipp))
+            if (!string.IsNullOrEmpty(valitudLipp)) //nullorempty -> vana pilt
                 valitudRiik.Lipp = valitudLipp;
 
             list.ItemsSource = null;
-            list.ItemsSource = riigid;
+            list.ItemsSource = riigid; // salvesta
 
             Puhasta();
         }
@@ -238,7 +238,7 @@ namespace MobileVerticalHorizontalApp
                 valitudLipp = valitudRiik.Lipp;
 
                 await DisplayAlertAsync("Info",
-                    $"Riik: {valitudRiik.Nimi}\nPealinn: {valitudRiik.Pealinn}\nRahvaarv: {valitudRiik.Rahvaarv}",
+                    $"Riik : {valitudRiik.Nimi}\nPealinn: {valitudRiik.Pealinn}\nRahvaarv : {valitudRiik.Rahvaarv}",
                     "OK");
             }
         }
