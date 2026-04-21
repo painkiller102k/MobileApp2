@@ -20,7 +20,8 @@ public partial class StartPage : ContentPage
             ("PopUp", new PopUp()),
             ("TripsTrapsTrull", new TripsTrapsTrull()),
             ("Kontaktandmed", new Kontaktandmed()),
-            ("ListPage", new ListViewPage())
+            ("ListPage", new ListViewPage()),
+            ("CarouselView", new CarouselView())
         };
 
         var layout = new VerticalStackLayout
