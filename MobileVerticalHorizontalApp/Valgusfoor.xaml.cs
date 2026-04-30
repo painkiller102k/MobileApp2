@@ -1,6 +1,6 @@
 ﻿namespace MobileVerticalHorizontalApp;
 
-public partial class MainPage : ContentPage
+public partial class Valgusfoor : ContentPage
 {
     BoxView redLight;
     BoxView yellowLight;
@@ -12,7 +12,7 @@ public partial class MainPage : ContentPage
 
     bool foorOn = false; // включен ли фоор
 
-    public MainPage()
+    public Valgusfoor()
     {
         // Pealkiri
         pealkiri = new Label

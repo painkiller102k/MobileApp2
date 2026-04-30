@@ -12,7 +12,7 @@ public partial class StartPage : ContentPage
         {
             ("Tekst", new TextPage(1)),
             ("Kujund", new FigurePage()),
-            ("Valgusfoor", new MainPage()),
+            ("Valgusfoor", new Valgusfoor()),
             ("Aeg ja kuupäev", new DateTimePage()),
             ("SliderPage", new StepperSliderPage()),
             ("RGBPage", new RGBPage()),
@@ -21,7 +21,8 @@ public partial class StartPage : ContentPage
             ("TripsTrapsTrull", new TripsTrapsTrull()),
             ("Kontaktandmed", new Kontaktandmed()),
             ("ListPage", new ListViewPage()),
-            ("CarouselView", new CarouselView())
+            ("CarouselView", new CarouselView()),
+            ("Pilt MAUI", new MainPage())
         };
 
         var layout = new VerticalStackLayout
